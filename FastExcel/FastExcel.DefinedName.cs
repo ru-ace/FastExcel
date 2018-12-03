@@ -112,7 +112,7 @@ namespace FastExcel
         {
             return GetCellsByDefinedName(definedName, worksheetIndex).FirstOrDefault();
         }
-        
+
         /// <summary>
         /// Returns all cells in a column by name, within optional row range
         /// </summary>

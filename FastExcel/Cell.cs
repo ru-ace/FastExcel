@@ -25,18 +25,18 @@ namespace FastExcel
         /// <summary>
         /// Defined name or the column letter(s) for column this cell is in
         /// </summary>
-        public string ColumnName { get; }
-        
+        public string ColumnName { get; private set; }
+
         /// <summary>
         /// Raw underlying XElement of cell
         /// </summary>
-        public XElement XElement { get; }
-        
+        public XElement XElement { get; private set; }
+
         /// <summary>
         /// List of defined names assigned to this cell
         /// *Does not include names of ranges this cell is within*
         /// </summary>
-        public IReadOnlyList<string> CellNames { get; }
+        public IReadOnlyList<string> CellNames { get; private set; }
 
         /// <summary>
         /// First defined name assigned to cell or cell Letter + row number if no named defined.
@@ -54,7 +54,7 @@ namespace FastExcel
         /// <summary>
         /// Number of the row this cell is on
         /// </summary>
-        public int RowNumber { get; }
+        public int RowNumber { get; private set; }
 
         /// <summary>
         /// Create a new Cell
@@ -116,7 +116,7 @@ namespace FastExcel
                 {
                     Value = cellElement.Value;
                 }
-                
+
             }
         }
 

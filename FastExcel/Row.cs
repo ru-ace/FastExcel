@@ -50,7 +50,7 @@ namespace FastExcel
             {
                 throw new Exception("Row Number not found", ex);
             }
-                        
+
             if (rowElement.HasElements)
             {
                 Cells = GetCells(rowElement, worksheet);
@@ -129,8 +129,8 @@ namespace FastExcel
 
             // Sort
             Cells = (from c in outputList
-                          orderby c.ColumnNumber
-                          select c);
+                     orderby c.ColumnNumber
+                     select c);
         }
     }
 }

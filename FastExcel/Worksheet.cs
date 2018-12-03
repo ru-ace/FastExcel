@@ -38,7 +38,7 @@ namespace FastExcel
         /// </summary>
         public int ExistingHeadingRows { get; set; }
         private int? InsertAfterIndex { get; set; }
-        
+
         /// <summary>
         /// Template
         /// </summary>

@@ -55,8 +55,8 @@ namespace FastExcel
                     worksheet.Index = sheetsElements.IndexOf(sheetElement) + 1;
 
                     worksheet.Name = (from attribute in sheetElement.Attributes()
-                                 where attribute.Name == "name"
-                                 select attribute.Value).FirstOrDefault();
+                                      where attribute.Name == "name"
+                                      select attribute.Value).FirstOrDefault();
 
                     worksheets.Add(worksheet);
                 }

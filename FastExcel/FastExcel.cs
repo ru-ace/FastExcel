@@ -11,7 +11,7 @@ namespace FastExcel
     /// <summary>
     /// Fast Excel
     /// </summary>
-    public partial class FastExcel: IDisposable
+    public partial class FastExcel : IDisposable
     {
         /// <summary>
         /// Output excel file
@@ -25,7 +25,7 @@ namespace FastExcel
         /// Is the excel file read only
         /// </summary>
         public bool ReadOnly { get; private set; }
-        
+
         internal SharedStrings SharedStrings { get; set; }
         internal ZipArchive Archive { get; set; }
         private bool UpdateExisting { get; set; }
@@ -51,14 +51,14 @@ namespace FastExcel
         /// </summary>
         /// <param name="excelFile">location of an existing excel file</param>
         /// <param name="readOnly">is the file read only</param>
-        public FastExcel(FileInfo excelFile, bool readOnly = false) : this(null, excelFile, true, readOnly) {}
-        
+        public FastExcel(FileInfo excelFile, bool readOnly = false) : this(null, excelFile, true, readOnly) { }
+
         /// <summary>
         /// Create a new excel file from a template
         /// </summary>
         /// <param name="templateFile">template location</param>
         /// <param name="excelFile">location of where a new excel file will be saved to</param>
-        public FastExcel(FileInfo templateFile, FileInfo excelFile) :this(templateFile, excelFile, false, false) {}
+        public FastExcel(FileInfo templateFile, FileInfo excelFile) : this(templateFile, excelFile, false, false) { }
 
         private FastExcel(FileInfo templateFile, FileInfo excelFile, bool updateExisting, bool readOnly = false)
         {
@@ -146,8 +146,8 @@ namespace FastExcel
         /// </summary>
         private void UpdateRelations(bool ensureStrings)
         {
-            if (!(ensureStrings || 
-                (DeleteWorksheets != null && DeleteWorksheets.Any()) || 
+            if (!(ensureStrings ||
+                (DeleteWorksheets != null && DeleteWorksheets.Any()) ||
                 (AddWorksheets != null && AddWorksheets.Any())))
             {
                 // Nothing to update
@@ -194,7 +194,7 @@ namespace FastExcel
                                                     from attribute in element.Attributes()
                                                     where attribute.Name == "Type" && attribute.Value == "http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet"
                                                     select element).ToArray();
-                    for (int i = worksheetElements.Length -1; i > 0; i--)
+                    for (int i = worksheetElements.Length - 1; i > 0; i--)
                     {
                         worksheetElements[i].Remove();
                         update = true;
@@ -241,9 +241,9 @@ namespace FastExcel
                 bool update = false;
 
                 RenameAndRebildWorksheetProperties((from sheet in document.Descendants()
-                                              where sheet.Name.LocalName == "sheet"
-                                              select sheet).ToArray());
-                
+                                                    where sheet.Name.LocalName == "sheet"
+                                                    select sheet).ToArray());
+
                 if (update)
                 {
                     // Re number sheet ids
@@ -300,8 +300,8 @@ namespace FastExcel
                 foreach (var item in DeleteWorksheets)
                 {
                     WorksheetProperties sheetToDelete = (from sp in sheetProperties
-                                        where sp.SheetId == item
-                                        select sp).FirstOrDefault();
+                                                         where sp.SheetId == item
+                                                         select sp).FirstOrDefault();
 
                     if (sheetToDelete != null)
                     {
@@ -317,9 +317,9 @@ namespace FastExcel
                 foreach (var item in AddWorksheets.Reverse<WorksheetAddSettings>())
                 {
                     WorksheetProperties previousSheet = (from sp in sheetProperties
-                                                where sp.SheetId == item.InsertAfterSheetId
-                                        select sp).FirstOrDefault();
-                    
+                                                         where sp.SheetId == item.InsertAfterSheetId
+                                                         select sp).FirstOrDefault();
+
                     if (previousSheet == null)
                     {
                         throw new Exception(string.Format("Sheet name {0} cannot be added because the insertAfterSheetNumber or insertAfterSheetName is now invalid", item.Name));
@@ -436,7 +436,7 @@ namespace FastExcel
                     stream.Position = 0;
                     // Clear the stream
                     stream.SetLength(0);
-                    
+
                     // Open the stream so we can override all content of the sheet
                     StreamWriter streamWriter = new StreamWriter(stream, Encoding.UTF8);
                     document.Save(streamWriter);
@@ -460,7 +460,8 @@ namespace FastExcel
         /// </summary>
         private void UpdateDocPropsApp(string[] sheetNames)
         {
-           /* if (sheetNames == null || !sheetNames.Any())
+            /*  
+            if (sheetNames == null || !sheetNames.Any())
             {
                 // Nothing to update
                 return;
@@ -474,7 +475,7 @@ namespace FastExcel
                 {
                     throw new Exception("Unable to load app.xml");
                 }
-                
+
                 // Update TilesOfParts
 
 
@@ -528,9 +529,10 @@ namespace FastExcel
                     document.Save(streamWriter);
                     streamWriter.Flush();
                 }
-            }*/
+            }
+            */
         }
-        
+
         /// <summary>
         /// Saves any pending changes to the Excel stream and adds/updates associated files if needed
         /// </summary>

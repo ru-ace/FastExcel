@@ -91,7 +91,7 @@ namespace FastExcel
         public void Write<T>(IEnumerable<T> rows, string sheetName, bool usePropertiesAsHeadings)
         {
             Worksheet data = new Worksheet();
-            data.PopulateRows<T>(rows, 0,usePropertiesAsHeadings);
+            data.PopulateRows<T>(rows, 0, usePropertiesAsHeadings);
             Write(data, null, sheetName, 0);
         }
 
@@ -133,7 +133,7 @@ namespace FastExcel
                 // Open worksheet and read the data at the top and bottom of the sheet
                 StreamReader streamReader = new StreamReader(stream);
                 worksheet.ReadHeadersAndFooters(streamReader, ref worksheet);
-                
+
                 //Set the stream to the start
                 stream.Position = 0;
 

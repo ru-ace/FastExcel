@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace FastExcel
 {
-    
+
     /// <summary>
     /// Reads/hold information from XElement representing a stored DefinedName
     /// A defined name is an alias for a cell, multiple cells, a range of cells or multiple ranges of cells
@@ -17,9 +17,9 @@ namespace FastExcel
     /// </summary>
     internal class DefinedName
     {
-        internal string Name { get; }
-        internal int? worksheetIndex { get; }
-        internal string Reference { get; }
+        internal string Name { get; private set; }
+        internal int? worksheetIndex { get; private set; }
+        internal string Reference { get; private set; }
         internal string Key { get { return Name + (!worksheetIndex.HasValue ? "" : ":" + worksheetIndex); } }
 
         internal DefinedName(XElement e)
@@ -28,7 +28,7 @@ namespace FastExcel
             if (e.Attribute("localSheetId") != null)
                 try
                 {
-                    worksheetIndex = Convert.ToInt32(e.Attribute("localSheetId").Value)+1;
+                    worksheetIndex = Convert.ToInt32(e.Attribute("localSheetId").Value) + 1;
                 }
                 catch (Exception exception)
                 {
